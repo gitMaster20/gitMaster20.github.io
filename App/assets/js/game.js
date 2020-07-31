@@ -11,7 +11,7 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: false
+            debug: false 
         }
     },
 	scene: {
@@ -29,7 +29,7 @@ let game = new Phaser.Game(config);
 
 
 function preload() {
-	this.load.image('genka_left_stand', 'App/assets/images/genka_left_stand.png');
+	this.load.image('genka_left_stand', 'App/assets/images/sprites/player_left/genka_left_stand.png');
 	this.load.spritesheet('grass', 'App/assets/images/world/grass.jpg', { frameWidth: config.width, frameHeight: 70 });	
 }
 
