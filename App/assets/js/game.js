@@ -29,6 +29,7 @@ let game = new Phaser.Game(config);
 
 
 function preload() {
+	this.load.image('sky', 'App/assets/images/world/sky.jpg')
 	this.load.image('genka_left_stand', 'App/assets/images/sprites/player_left/genka_left_stand.png');
 	this.load.spritesheet('grass', 'App/assets/images/world/grass.jpg', { frameWidth: config.width, frameHeight: 70 });	
 }
@@ -55,11 +56,14 @@ function create() {
 	    repeat: -1
 	});
 
+	//sky
+	this.add.image(config.width / 2, config.height / 2, 'sky').setScale(1.3);
+
 	// platforms
 	let platforms = this.physics.add.staticGroup();
 		platforms.create(config.width / 2, config.height - 10, 'grass').setScale(1).refreshBody();
 		
-
+	// player
 		player = this.physics.add.sprite(650, 320, 'genka_left_stand');
 
 		player.setBounce(0.2);
