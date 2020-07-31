@@ -26,15 +26,10 @@ let game = new Phaser.Game(config);
 
 function preload() {
 	this.load.image('genka_left_stand', 'App/assets/images/genka_left_stand.png');
+	this.load.spritesheet('grass', 'App/assets/images/world/grass.jpg', { frameWidth: config.width, frameHeight: 70 });	
 }
 
 function create() {
-	player = this.physics.add.sprite(650, 320, 'genka_left_stand');
-
-	player.setBounce(0.2);
-	player.setCollideWorldBounds(true);
-	player.body.setGravityY(300);
-	
 	// sprites
 	this.anims.create({
 		key: 'left',
@@ -58,12 +53,15 @@ function create() {
 
 	// platforms
 	let platforms = this.physics.add.staticGroup();
-		platforms.create(400, 500, 'ground').setScale(2).refreshBody();
-		platforms.create(600, 400, 'ground');
-		platforms.create(50, 250, 'ground');
-		platforms.create(650, 450, 'ground');
-		platforms.create(750, 220, 'ground');
+		platforms.create(config.width / 2, config.height - 10, 'grass').setScale(1).refreshBody();
+		
 
+		player = this.physics.add.sprite(650, 320, 'genka_left_stand');
+
+		player.setBounce(0.2);
+		player.setCollideWorldBounds(true);
+		player.body.setGravityY(300);
+		
 	// set player and platforms collision
 	this.physics.add.collider(player, platforms);
 
