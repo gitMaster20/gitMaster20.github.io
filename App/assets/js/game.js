@@ -5,13 +5,13 @@ let player = null;
 // game config
 let config = {
 	type: Phaser.AUTO,
-	width: 1330,
+	width: 1350,
 	height: 640,
 	physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: true
+            debug: false
         }
     },
 	scene: {
@@ -20,6 +20,10 @@ let config = {
 		update: update
 	}
 };
+
+if (window.innerWidth >= config.width && window.innerHeight >= config.height) {
+	document.body.style.overflow = 'hidden';
+}
 
 let game = new Phaser.Game(config);
 
