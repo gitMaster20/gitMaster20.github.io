@@ -1,6 +1,6 @@
 'use strict';
 
-let player = null; 
+let player = null, shrek = null; 
 
 // game config
 let config = {
@@ -31,28 +31,29 @@ let game = new Phaser.Game(config);
 function preload() {
 	this.load.image('sky', 'App/assets/images/world/sky.jpg')
 	this.load.spritesheet('grass', 'App/assets/images/world/grass.jpg', { frameWidth: config.width, frameHeight: 70 });	
-	this.load.spritesheet('genka_right_run', 'App/assets/images/sprites/player_left/right_run.png', {frameWidth: 94, frameHeight: 123});	
+	this.load.spritesheet('genka_right_run', 'App/assets/images/sprites/player_left/right_run.png', {frameWidth: 95, frameHeight: 123});	
+	this.load.image('shrek', 'App/assets/images/shrek.png');	
 }
 
 function create() {
 	// sprites
 	this.anims.create({
     	key: 'left',
-	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [1, 2, 3, 4, 5, 6, 7] }),
-	    frameRate: 10,
+	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [0, 1, 2, 3, 4, 5, 6, 7] }),
+	    frameRate: 15,
 	    repeat: -1
 	});
 
 	this.anims.create({
 	    key: 'stand',
 	    frames: [ { key: 'genka_right_run', frame: 0 } ],
-	    frameRate: 20
+	    frameRate: 15
 	});
 
 	this.anims.create({
 	    key: 'right',
-	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [1, 2, 3, 4, 5, 6, 7]}),
-	    frameRate: 10,
+	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [0, 1, 2, 3, 4, 5, 6, 7]}),
+	    frameRate: 15,
 	    repeat: -1
 	});
 
@@ -73,8 +74,15 @@ function create() {
 	// set player and platforms collision
 	this.physics.add.collider(player, platforms);
 
+	// create shrek
+	shrek = this.physics.add.image(200, 200, 'shrek');
+	shrek.setVelocity(100, 100);
+	shrek.setBounce(1, 1);
+	shrek.setScale(0.1).refreshBody();
+	shrek.setCollideWorldBounds(true);
 	
-
+	this.physics.add.collider(shrek, platforms);
+	this.physics.add.collider(player, shrek);
 }
 
 function update() {
