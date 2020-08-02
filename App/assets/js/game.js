@@ -30,28 +30,28 @@ let game = new Phaser.Game(config);
 
 function preload() {
 	this.load.image('sky', 'App/assets/images/world/sky.jpg')
-	this.load.image('genka_left_stand', 'App/assets/images/sprites/player_left/genka_left_stand.png');
 	this.load.spritesheet('grass', 'App/assets/images/world/grass.jpg', { frameWidth: config.width, frameHeight: 70 });	
+	this.load.spritesheet('genka_right_run', 'App/assets/images/sprites/player_left/right_run.png', {frameWidth: 94, frameHeight: 123});	
 }
 
 function create() {
 	// sprites
 	this.anims.create({
-		key: 'left',
-		frames: this.anims.generateFrameNumbers('duck', {start: 0, end: 3}),
-		frameRate: 10,
-		repeat: -1
+    	key: 'left',
+	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [1, 2] }),
+	    frameRate: 10,
+	    repeat: -1
 	});
 
 	this.anims.create({
-	    key: 'turn',
-	    frames: [ { key: 'duck', frame: 4 } ],
+	    key: 'stand',
+	    frames: [ { key: 'genka_right_run', frame: 0 } ],
 	    frameRate: 20
 	});
 
 	this.anims.create({
 	    key: 'right',
-	    frames: this.anims.generateFrameNumbers('duck', { start: 5, end: 8 }),
+	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [1, 2, 3, 4, 5, 6, 7]}),
 	    frameRate: 10,
 	    repeat: -1
 	});
@@ -64,7 +64,7 @@ function create() {
 		platforms.create(config.width / 2, config.height - 10, 'grass').setScale(1).refreshBody();
 		
 	// player
-		player = this.physics.add.sprite(650, 320, 'genka_left_stand');
+		player = this.physics.add.sprite(650, 320, 'genka_right_run', 0);
 
 		player.setBounce(0.2);
 		player.setCollideWorldBounds(true);
@@ -75,24 +75,29 @@ function create() {
 
 	
 
-
 }
 
 function update() {
 
 	// player moving
 	let cursors = this.input.keyboard.createCursorKeys();
-
+	
 	if (cursors.left.isDown) {
 		player.setVelocityX(-160);
+		player.anims.play('left', true);
+		player.flipX = true;
 	} else if (cursors.right.isDown) {
 		player.setVelocityX(160);
+		player.anims.play('right', true);
+		player.flipX = false;
 	} else {
 		player.setVelocityX(0);
+		player.anims.play('stand');
 	}
 
 	if (cursors.up.isDown && player.body.touching.down) {
 		player.setVelocityY(-330);
 	}
+
 }
 
