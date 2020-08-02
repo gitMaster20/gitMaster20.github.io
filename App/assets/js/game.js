@@ -82,11 +82,12 @@ function create() {
 	shrek.setCollideWorldBounds(true);
 	
 	this.physics.add.collider(shrek, platforms);
-	this.physics.add.collider(player, shrek);
+	this.physics.add.collider(shrek, player);
 }
 
 function update() {
 
+	shrek.angle++;
 	// player moving
 	let cursors = this.input.keyboard.createCursorKeys();
 	
