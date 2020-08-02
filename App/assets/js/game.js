@@ -76,8 +76,8 @@ function create() {
 
 	// create shrek
 	shrek = this.physics.add.image(200, 200, 'shrek');
-	shrek.setVelocity(100, 100);
-	shrek.setBounce(1, 1);
+	shrek.setVelocity(200, 200);
+	shrek.setBounce(1.4, 1.4);
 	shrek.setScale(0.1).refreshBody();
 	shrek.setCollideWorldBounds(true);
 	
@@ -91,11 +91,11 @@ function update() {
 	let cursors = this.input.keyboard.createCursorKeys();
 	
 	if (cursors.left.isDown) {
-		player.setVelocityX(-160);
+		player.setVelocityX(-200);
 		player.anims.play('left', true);
 		player.flipX = true;
 	} else if (cursors.right.isDown) {
-		player.setVelocityX(160);
+		player.setVelocityX(200);
 		player.anims.play('right', true);
 		player.flipX = false;
 	} else {
