@@ -77,7 +77,7 @@ function create() {
 	// create shrek
 	shrek = this.physics.add.image(200, 200, 'shrek');
 	shrek.setVelocity(200, 200);
-	shrek.setBounce(1.4, 1.4);
+	shrek.setBounce(1.1, 1.1);
 	shrek.setScale(0.1).refreshBody();
 	shrek.setCollideWorldBounds(true);
 	
