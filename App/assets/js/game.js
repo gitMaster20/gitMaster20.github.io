@@ -38,7 +38,7 @@ function create() {
 	// sprites
 	this.anims.create({
     	key: 'left',
-	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [1, 2] }),
+	    frames: this.anims.generateFrameNumbers('genka_right_run', { frames: [1, 2, 3, 4, 5, 6, 7] }),
 	    frameRate: 10,
 	    repeat: -1
 	});
